@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  web:
+    image: nginx:alpine
+    container_name: RSA_nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./src:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - php-fpm
+  php-fpm:
+    image: php:8-fpm
+    container_name: RSA_php-fpm
+    volumes:
+      - ./src:/var/www/html
+  composer:
+    image: composer:latest
+    container_name: RSA_composer
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./src:/app
