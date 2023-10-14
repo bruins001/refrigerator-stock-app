@@ -1,0 +1,9 @@
+<table>
+    <tr>
+        <th>Photo</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Date</th>
+        <th>EAN</th>
+    </tr>
+</table>
