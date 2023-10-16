@@ -6,7 +6,7 @@ This app keeps track of the items in your refrigerator. You can add, update and 
 Currently we are not allowing new collaborators.
 # Current maintainers and contributors.
 ## Maintainers
-Niels Bruinsma
+- bruins001
 ## Contributors
-QuiNz-
-Niels Bruinsma
+- QuiNz-
+- bruins001
