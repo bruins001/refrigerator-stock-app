@@ -4,8 +4,9 @@ This app keeps track of the items in your refrigerator. You can add, update and 
 # Installation
 # Controbutions
 Currently we are not allowing new collaborators.
-# Current maintainers and collaborators.
+# Current maintainers and contributors.
 ## Maintainers
 Niels Bruinsma
-## Collaborators
+## Contributors
 QuiNz-
+Niels Bruinsma
