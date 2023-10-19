@@ -18,6 +18,8 @@ class AuthenticationController {
         // SDK completes authentication flow.
         try {
             $auth0->exchange($ROUTE_URL_CALLBACK);
+            session_start();
+            $_SESSION["user"] = $auth0->getCredentials();
         } catch (Exception $e) {
             echo "Authentication failed: " . $e;
             exit;
@@ -29,8 +31,14 @@ class AuthenticationController {
     }
 
     static function checkForSession($auth0) {
-        $session = $auth0->getCredentials();
+        $session = null;
+        if (!isset($_SESSION["user"]) && $auth0->getCredentials()) {
+            $_SESSION["user"] = $auth0->getCredentials();
+        } else if (isset($_SESSION["user"])) {
+            $session = $_SESSION["user"];
+        }
+
         return $session;
     }
-};
+}
 ?>
