@@ -3,12 +3,12 @@
 ?>
 <header>
     <?php
-        if (!isset($session) || $session === null) {
+        if (!isset($_SESSION['user']) || $_SESSION['user'] === null) {
             // User not logged in.
             echo '<p>You can login <a href="login">here</a>.</p>';
         } else {
             // User is logged in.
-            echo '<pre>' . $session->user['nickname'] . '</pre>';
+            echo '<pre>' . $_SESSION['user']->user['nickname'] . '</pre>';
             echo '<p>You can logout <a href="/logout">here</a>.</p>';
         }
     ?>
