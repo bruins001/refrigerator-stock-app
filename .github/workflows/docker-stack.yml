@@ -26,7 +26,7 @@ jobs:
       run: docker-compose up -d
 
     - name: Install composer dependencies
-      run: docker run --rm --interactive --tty --volume $PWD/src:/app composer install
+      run: docker run --rm --interactive --volume $PWD/src:/app composer install
 
     - name: Check for nginx port
       run: curl http://localhost:8080
