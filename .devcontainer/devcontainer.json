@@ -1,0 +1,6 @@
+{
+    "name": "Refrigerator-stock-app",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "RSA_web",
+    "workspaceFolder": "/var/www/html"
+}
