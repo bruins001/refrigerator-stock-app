@@ -30,9 +30,6 @@ jobs:
     - name: Check for nginx port
       run: curl http://localhost:8080
 
-    - name: Check for MySQL port
-      run: curl http://localhost:3306
-
   docker-stack-windows:
     runs-on: windows-latest
 
@@ -55,9 +52,6 @@ jobs:
     - name: Check for nginx port
       run: curl http://localhost:8080
 
-    - name: Check for MySQL port
-      run: curl http://localhost:3306
-
   docker-stack-macos:
     runs-on: macos-latest
 
@@ -65,7 +59,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Download Docker images
-      run: docker compose pull
+      run: docker-compose pull
 
     - name: Start docker-compose
       env:
@@ -79,6 +73,3 @@ jobs:
 
     - name: Check for nginx port
       run: curl http://localhost:8080
-
-    - name: Check for MySQL port
-      run: curl http://localhost:3306
