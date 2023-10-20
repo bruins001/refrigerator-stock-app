@@ -58,10 +58,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: crazy-max/ghaction-setup-docker@v2
 
     - name: Install docker-compose
       run: brew install docker-compose
+
+    - name: Install WSL
+      run: wsl --install
 
     - name: Download Docker images
       run: docker-compose pull
