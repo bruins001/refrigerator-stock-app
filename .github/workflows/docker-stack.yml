@@ -58,8 +58,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Install Docker
+      run: brew install docker
+
     - name: Download Docker images
-      run: docker-compose pull
+      run: docker compose pull
 
     - name: Start docker-compose
       env:
