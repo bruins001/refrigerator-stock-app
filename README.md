@@ -24,7 +24,7 @@ This app keeps track of the items in your refrigerator. You can add, update and 
 5. Install dependencies:   
    ```
    docker run --rm --interactive --tty \
-    --volume $PWD:/src/app \
+    --volume $PWD/src:/app \
     composer install
    ```
    It will automatically delete the `composer` container. You can remove the image by
