@@ -30,33 +30,6 @@ jobs:
     - name: Check for nginx port
       run: curl http://localhost:8080
 
-  docker-stack-windows:
-    runs-on: windows-latest
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Switch docker to linux engine
-      env:
-        LCOW_SUPPORTED: "1"
-      run: Restart-Service docker
-
-    - name: Download Docker images
-      run: docker-compose pull
-
-    - name: Start docker-compose
-      env:
-        MYSQL_USER: user
-        MYSQL_PASSWORD: user
-        MYSQL_DATABASE: Refrigerator-stock-app
-      run: docker-compose up -d
-
-    - name: Install composer dependencies
-      run: docker run --rm --interactive --volume $PWD/src:/app composer install
-
-    - name: Check for nginx port
-      run: curl http://localhost:8080
-
   docker-stack-macos:
     runs-on: macos-latest
 
