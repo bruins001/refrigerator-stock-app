@@ -35,9 +35,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
-    - name: Install WSL
-      run: wsl --install
+    - uses: Vampire/setup-wsl@v2
 
     - name: Download Docker images
       run: docker-compose pull
