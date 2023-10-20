@@ -1,5 +1,10 @@
 {
     "name": "Refrigerator-stock-app",
+    "remoteEnv": {
+        "MYSQL_USER": "user",
+        "MYSQL_PASSWORD": "user",
+        "MYSQL_DATABASE": "test"
+    },
     "forwardPorts": [8080, 3306],
     "dockerComposeFile": "../docker-compose.yml",
     "service": "RSA_web",
