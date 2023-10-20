@@ -1,5 +1,6 @@
 {
     "name": "Refrigerator-stock-app",
+    "forwardPorts": [8080, 3306],
     "dockerComposeFile": "../docker-compose.yml",
     "service": "RSA_web",
     "workspaceFolder": "/var/www/html"
