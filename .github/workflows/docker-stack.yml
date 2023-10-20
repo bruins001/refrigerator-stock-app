@@ -35,7 +35,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: Vampire/setup-wsl@v2
+
+    - name: Switch docker to linux engine
+      run: ./DockerCli.exe -SwitchLinuxEngine
 
     - name: Download Docker images
       run: docker-compose pull
