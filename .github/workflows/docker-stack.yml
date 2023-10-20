@@ -10,7 +10,7 @@ jobs:
 
   build:
 
-    runs-on: [ubuntu-latest]
+    runs-on: [ubuntu-latest, windows-latest]
 
     steps:
     - uses: actions/checkout@v3
@@ -30,5 +30,8 @@ jobs:
 
     - name: Check for nginx port
       run: curl http://localhost:8080
+
+    - name: Check for MySQL port
+      run: curl http://localhost:3306
 
     
