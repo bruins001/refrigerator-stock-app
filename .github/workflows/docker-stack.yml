@@ -8,9 +8,8 @@ on:
 
 jobs:
 
-  build:
-
-    runs-on: [windows-latest, macos-latest]
+  docker-stack-ubuntu:
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -34,4 +33,52 @@ jobs:
     - name: Check for MySQL port
       run: curl http://localhost:3306
 
-    
+  docker-stack-windows:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Download Docker images
+      run: docker compose pull
+
+    - name: Start docker-compose
+      env:
+        MYSQL_USER: user
+        MYSQL_PASSWORD: user
+        MYSQL_DATABASE: Refrigerator-stock-app
+      run: docker-compose up -d
+
+    - name: Install composer dependencies
+      run: docker run --rm --interactive --volume $PWD/src:/app composer install
+
+    - name: Check for nginx port
+      run: curl http://localhost:8080
+
+    - name: Check for MySQL port
+      run: curl http://localhost:3306
+
+  docker-stack-macos:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Download Docker images
+      run: docker compose pull
+
+    - name: Start docker-compose
+      env:
+        MYSQL_USER: user
+        MYSQL_PASSWORD: user
+        MYSQL_DATABASE: Refrigerator-stock-app
+      run: docker-compose up -d
+
+    - name: Install composer dependencies
+      run: docker run --rm --interactive --volume $PWD/src:/app composer install
+
+    - name: Check for nginx port
+      run: curl http://localhost:8080
+
+    - name: Check for MySQL port
+      run: curl http://localhost:3306
