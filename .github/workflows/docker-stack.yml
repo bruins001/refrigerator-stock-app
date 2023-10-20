@@ -61,6 +61,9 @@ jobs:
     - name: Install Docker
       run: brew install docker docker-compose
 
+    - name: Start Docker
+      run: open -a Docker
+
     - name: Download Docker images
       run: docker-compose pull
 
