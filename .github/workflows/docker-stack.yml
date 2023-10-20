@@ -20,9 +20,9 @@ jobs:
 
     - name: Start docker-compose
       env:
-        MYSQL_USER=user
-        MYSQL_PASSWORD=user
-        MYSQL_DATABASE=Refrigerator-stock-app
+        MYSQL_USER: user
+        MYSQL_PASSWORD: user
+        MYSQL_DATABASE: Refrigerator-stock-app
       run: docker-compose up -d
 
     - name: Install composer dependencies
