@@ -24,6 +24,7 @@ services:
     tty: true
     volumes:
       - ./src:/app
+    command: composer install
   RSA_db:
     image: docker.io/mysql:latest
     container_name: db
