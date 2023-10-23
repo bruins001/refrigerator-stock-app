@@ -5,7 +5,7 @@ class HomepageController {
     static function index($auth0) {
         AuthenticationController::checkForSession($auth0);
 
-        require 'templates/homepage.php';
+        require 'templates/default/homepage.php';
     }
 }
 ?>

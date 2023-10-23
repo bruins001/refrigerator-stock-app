@@ -1,7 +1,7 @@
 <?php
 require_once 'vendor/autoload.php';
-require_once 'controllers/AuthenticationController.php';
-require_once 'controllers/HomepageController.php';
+require_once 'controllers/default/AuthenticationController.php';
+require_once 'controllers/default/HomepageController.php';
 require_once 'auth0.php';
 
 use Steampixel\Route; // The router library
@@ -16,5 +16,5 @@ ROUTE::add('/login', fn() => AuthenticationController::login($auth0, ROUTE_URL_C
 ROUTE::add('/callback', fn() => AuthenticationController::callback($auth0, ROUTE_URL_CALLBACK, ROUTE_URL_INDEX));
 ROUTE::add('/logout', fn() => AuthenticationController::logout($auth0, ROUTE_URL_INDEX));
 
-ROUTE::run('/')
+ROUTE::run('/');
 ?>
