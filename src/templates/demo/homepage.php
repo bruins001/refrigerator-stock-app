@@ -10,5 +10,6 @@
     <?php include 'components/_header.php'; ?>
     <h1>Refrigerator stock app</h1>
     <?php include 'components/_stockInTableFormat.php'; ?>
+    <script src="/assets/js/app.js"></script>
 </body>
 </html>
