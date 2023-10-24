@@ -1,11 +1,10 @@
 class Column {
     constructor(tableOfColum, columnName) {
-        this.tableOfColum = tableOfColum;
         this.domColumnHeader = HTMLElement;
         this.domRowArray = new Array();
         
         let coloumIndex = -1;
-        let tableHeadersArray = this.tableOfColum.headers;
+        let tableHeadersArray = tableOfColum.headers;
         for (let idx=0; idx < tableHeadersArray.length; idx++) {
             coloumIndex++;
             let domColumnHeader = tableHeadersArray[idx];
@@ -15,8 +14,8 @@ class Column {
             }
         }
 
-        for (let idx=0; idx < this.tableOfColum.domRecordsArray.length; idx++) {
-            let domRow = this.tableOfColum.domRecordsArray[idx];
+        for (let idx=0; idx < tableOfColum.domRecordsArray.length; idx++) {
+            let domRow = tableOfColum.domRecordsArray[idx];
             this.domRowArray.push(domRow.getElementsByTagName('th')[coloumIndex]);
         }
     }
@@ -29,10 +28,15 @@ class Table {
         this.headers = domAllColumnsArray[0].getElementsByTagName('th');
         domAllColumnsArray.shift();
         this.domRecordsArray = domAllColumnsArray;
+        this.columnsArray = new Array();
+
+        for (let idx=0; idx < this.headers.length; idx++) {
+            let newColumn = new Column(this, this.headers[idx].innerHTML);
+            this.columnsArray.push(newColumn);
+        }
     }
 }
 
 let domTable = document.getElementById('table-in-stock');
 const table = new Table(domTable);
-const column = new Column(table, "Name");
-console.log(column.domRowArray);
+console.log(table.columnsArray);
