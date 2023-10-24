@@ -1,11 +1,11 @@
 class Column {
-    constructor(tableOfColoum, columnName) {
-        this.tableOfColoum = tableOfColoum;
+    constructor(tableOfColum, columnName) {
+        this.tableOfColum = tableOfColum;
         this.domColumnHeader = HTMLElement;
         this.domRowArray = new Array();
         
         let coloumIndex = -1;
-        let tableHeadersArray = this.tableOfColoum.headers;
+        let tableHeadersArray = this.tableOfColum.headers;
         for (let idx=0; idx < tableHeadersArray.length; idx++) {
             coloumIndex++;
             let domColumnHeader = tableHeadersArray[idx];
@@ -15,8 +15,8 @@ class Column {
             }
         }
 
-        for (let idx=0; idx < this.tableOfColoum.domRecordsArray.length; idx++) {
-            let domRow = this.tableOfColoum.domRecordsArray[idx];
+        for (let idx=0; idx < this.tableOfColum.domRecordsArray.length; idx++) {
+            let domRow = this.tableOfColum.domRecordsArray[idx];
             this.domRowArray.push(domRow.getElementsByTagName('th')[coloumIndex]);
         }
     }
