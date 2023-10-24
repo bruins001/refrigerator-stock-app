@@ -1,4 +1,4 @@
-<table>
+<table id="table-in-stock">
     <tr>
         <th>Photo</th>
         <th>Name</th>
