@@ -15,6 +15,7 @@ services:
   RSA_php-fpm:
     image: docker.io/php:8.1.25RC1-fpm-alpine3.18
     container_name: php-fpm
+    restart: unless-stopped
     volumes:
       - ./src:/var/www/html
   RSA_composer:
