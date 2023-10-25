@@ -6,7 +6,7 @@ require_once 'auth0.php';
 
 use Steampixel\Route; // The router library
 
-define('ROUTE_URL_INDEX', rtrim(getenv('AUTH0_BASE_URL'), '/'));
+define('ROUTE_URL_INDEX', rtrim($_ENV['AUTH0_BASE_URL'], '/'));
 define('ROUTE_URL_LOGIN', ROUTE_URL_INDEX . '/login');
 define('ROUTE_URL_CALLBACK', ROUTE_URL_INDEX . '/callback');
 define('ROUTE_URL_LOGOUT', ROUTE_URL_INDEX . '/logout');
