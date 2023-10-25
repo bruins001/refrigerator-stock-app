@@ -19,10 +19,10 @@
         <input type="text" name="type" required></input>
         <br />
         <label for="experation-date">Experation date: </label>
-        <input type="text" for="experation-date" required></input>
+        <input type="text" name="experation-date" required></input>
         <br />
         <label type="text" for="barcode">Barcode: </label>
-        <input type="number" for="barcode" required></input>
+        <input type="number" name="barcode" required></input>
         <br />
         <input type="submit">
       </form>
