@@ -25,7 +25,7 @@
         <input type="text" for="experation-date" required></input>
         <br />
         <label type="text" for="barcode">Barcode: </label>
-        <input type="number" for="barcode" min="12" max="12" required></input>
+        <input type="number" for="barcode" required></input>
         <br />
         <input type="submit">
       </form>
