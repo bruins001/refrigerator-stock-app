@@ -59,5 +59,21 @@ const table = new Table(domTable);
 const newRecordArray = ['placeholder', 'placeholder', 'placeholder', 'placeholder'];
 table.addRecord(newRecordArray);
 
-console.log(table.columnsArray);
-console.log(table.domRecordsArray);
+let formProduct = document.getElementById('form-add-product');
+formProduct.addEventListener("submit", (e) => {
+  e.preventDefault();
+  let domForm = e.target;
+  let inputsArray = new Array().filter.call(domForm.getElementsByTagName('input'), (element) => element.getAttribute('type') != 'submit');
+  for (let idx=0; idx < inputsArray.length; idx++) {
+    console.log(inputsArray[idx].getAttribute('name') === 'barcode');
+    if (inputsArray[idx].getAttribute('name') === 'barcode' && inputsArray[idx].value.length !== 12) {
+      throw new Error('The barcode isn\'t 12 digits.');
+    } else if (inputsArray[idx].getAttribute('name') === 'barcode') {
+      inputsArray[idx] = parseInt(inputsArray[idx].value);
+      continue;
+    }
+    inputsArray[idx] = inputsArray[idx].value;
+  }
+
+  table.addRecord(inputsArray);
+});
