@@ -12,9 +12,6 @@
     <h1>Refrigerator stock app</h1>
     <h2>Product form</h2>
     <form id="add-product-form">
-      <label for="photo">Photo: </label>
-      <input type="file" name="photo"></input>
-      <br />
       <label for="name">Name: </label>
       <input type="text" name="name" required></input>
       <br />

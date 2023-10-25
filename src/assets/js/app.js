@@ -38,7 +38,6 @@ class Table {
 
     addRecord = (newRecordArray) => {
         if (newRecordArray.length != this.columnsArray.length) {
-            console.log(this.columnsArray.length)
             throw new Error('Argument "newRecordArray" is not the same length as the number of colums in this Table.');
         }
 
@@ -57,9 +56,7 @@ class Table {
 
 let domTable = document.getElementById('table-in-stock');
 const table = new Table(domTable);
-const domNewImgElement = document.createElement('img');
-domNewImgElement.src = '/assets/images/placeholder.jpg';
-const newRecordArray = [domNewImgElement, 'placeholder', 'placeholder', 'placeholder', 'placeholder'];
+const newRecordArray = ['placeholder', 'placeholder', 'placeholder', 'placeholder'];
 table.addRecord(newRecordArray);
 
 console.log(table.columnsArray);
