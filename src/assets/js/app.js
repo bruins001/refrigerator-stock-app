@@ -19,6 +19,16 @@ class Column {
             this.domRowArray.push(domRow.getElementsByTagName('th')[coloumIndex]);
         }
     }
+
+    addNewRows = (RowsToAdd) => {
+        for (let rowIdx=0; rowIdx < RowsToAdd.length; rowIdx++) {
+            RowsToAdd[rowIdx].addEventListener('dblclick', (e) => {
+                e.preventDefault();
+                console.log('You dubble clicked a product property.');
+            });
+            console.log("test");
+        }
+    }
 }
 
 class Table {
@@ -46,7 +56,7 @@ class Table {
             let domNewRecord = document.createElement('td');
             domNewRecord.append(newRecordArray[idx]);
             domNewTableRow.append(domNewRecord);
-            this.columnsArray[idx].domRowArray.push(domNewRecord);
+            this.columnsArray[idx].addNewRows(new Array(domNewRecord));
         }
 
         this.table.getElementsByTagName('tbody')[0].appendChild(domNewTableRow);
