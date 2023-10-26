@@ -26,7 +26,6 @@ class Column {
                 e.preventDefault();
                 console.log('You dubble clicked a product property.');
             });
-            console.log("test");
         }
     }
 }
