@@ -28,6 +28,7 @@
       </form>
     </main>
     <?php include 'components/_stockInTableFormat.php'; ?>
+    <div id="filter-box"></div>
     <script src="/assets/js/app.js"></script>
 </body>
 </html>
