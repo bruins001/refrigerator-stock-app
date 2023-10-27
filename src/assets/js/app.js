@@ -1,8 +1,10 @@
+let domFilterBox = document.getElementById('filter-box');
+
 class Column {
     constructor(tableOfColum, columnName) {
         this.domColumnHeader = HTMLElement;
         this.domRowArray = new Array();
-        
+
         let coloumIndex = -1;
         let tableHeadersArray = tableOfColum.headers;
         for (let idx=0; idx < tableHeadersArray.length; idx++) {
@@ -20,13 +22,30 @@ class Column {
         }
     }
 
-    addNewRows = (RowsToAdd) => {
-        for (let rowIdx=0; rowIdx < RowsToAdd.length; rowIdx++) {
-            RowsToAdd[rowIdx].addEventListener('dblclick', (e) => {
-                e.preventDefault();
-                console.log('You dubble clicked a product property.');
+    addNewRow = (rowToAdd) => {
+        rowToAdd.addEventListener('click', (e) => {
+            e.preventDefault();
+            let domHeader = e.target.parentElement;
+            let filterForm = document.createElement('form');
+            filterForm.setAttribute('id', 'filter-product-form');
+            let LabelsAndInputsToAddArray = new Array('name', 'type', 'experation date', 'barcode');
+            let iterationCounter = -1;
+            Array.from(domHeader.getElementsByTagName('td')).forEach((element) => {
+              iterationCounter++;
+              let propertyName = LabelsAndInputsToAddArray[iterationCounter];
+
+              let filterBoxEditNameLabel = document.createElement('label');
+              filterBoxEditNameLabel.innerHTML = propertyName.charAt(0).toUpperCase() + propertyName.slice(1) + ': ';
+              filterBoxEditNameLabel.setAttribute('for', 'filter-product-name-input');
+              filterForm.append(filterBoxEditNameLabel);
+              let filterBoxEditNameInput = document.createElement('input');
+              filterBoxEditNameInput.value = element.innerHTML;
+              filterBoxEditNameInput.setAttribute('id', 'filter-product-' + propertyName + '-input');
+              filterBoxEditNameInput.setAttribute('name', propertyName);
+              filterForm.append(filterBoxEditNameInput);
             });
-        }
+            domFilterBox.append(filterForm);
+        });
     }
 }
 
@@ -55,7 +74,7 @@ class Table {
             let domNewRecord = document.createElement('td');
             domNewRecord.append(newRecordArray[idx]);
             domNewTableRow.append(domNewRecord);
-            this.columnsArray[idx].addNewRows(new Array(domNewRecord));
+            this.columnsArray[idx].addNewRow(domNewRecord);
         }
 
         this.table.getElementsByTagName('tbody')[0].appendChild(domNewTableRow);
@@ -65,10 +84,10 @@ class Table {
 
 let domTable = document.getElementById('table-in-stock');
 const table = new Table(domTable);
-const newRecordArray = ['placeholder', 'placeholder', 'placeholder', 'placeholder'];
+const newRecordArray = ['Milk', 'dairy', '27-10-2023', 123456789123];
 table.addRecord(newRecordArray);
 
-let formProduct = document.getElementById('form-add-product');
+let formProduct = document.getElementById('add-product-form');
 formProduct.addEventListener("submit", (e) => {
   e.preventDefault();
   let domForm = e.target;
