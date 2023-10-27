@@ -11,18 +11,18 @@
     <main>
       <h1>Refrigerator stock app</h1>
       <h2>Product form</h2>
-      <form id="form-add-product">
-        <label for="name">Name: </label>
-        <input type="text" name="name" required></input>
+      <form id="add-product-form">
+        <label for="add-product-name-input">Name: </label>
+        <input type="text" name="name" id="add-product-name-input" required></input>
         <br />
-        <label for="type">Type: </label>
-        <input type="text" name="type" required></input>
+        <label for="add-product-type-input">Type: </label>
+        <input type="text" name="type" id="add-product-type-input" required></input>
         <br />
-        <label for="experation-date">Experation date: </label>
-        <input type="text" name="experation-date" required></input>
+        <label for="add-product-experation-date-input">Experation date: </label>
+        <input type="text" name="experation-date" id="add-product-experation-date-input" required></input>
         <br />
-        <label type="text" for="barcode">Barcode: </label>
-        <input type="number" name="barcode" required></input>
+        <label type="text" for="add-product-barcode-input">Barcode: </label>
+        <input type="number" name="barcode" id="add-product-barcode-input" required></input>
         <br />
         <input type="submit">
       </form>
