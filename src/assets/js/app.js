@@ -1,6 +1,6 @@
 let domFilterBox = document.getElementById('filter-box');
 
-class Row {
+class Record {
     constructor(domRow) {
         this.domTableDataArray = new Array();
         this.isSelected = false;
