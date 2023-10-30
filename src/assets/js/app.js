@@ -36,32 +36,6 @@ class Column {
             this.domRowArray.push(domRow.getElementsByTagName('th')[coloumIndex]);
         }
     }
-
-    addNewRow = (rowToAdd) => {
-        rowToAdd.addEventListener('click', (e) => {
-            e.preventDefault();
-            let domHeader = e.target.parentElement;
-            let filterForm = document.createElement('form');
-            filterForm.setAttribute('id', 'filter-product-form');
-            let LabelsAndInputsToAddArray = new Array('name', 'type', 'experation date', 'barcode');
-            let iterationCounter = -1;
-            Array.from(domHeader.getElementsByTagName('td')).forEach((element) => {
-              iterationCounter++;
-              let propertyName = LabelsAndInputsToAddArray[iterationCounter];
-
-              let filterBoxEditNameLabel = document.createElement('label');
-              filterBoxEditNameLabel.innerHTML = propertyName.charAt(0).toUpperCase() + propertyName.slice(1) + ': ';
-              filterBoxEditNameLabel.setAttribute('for', 'filter-product-name-input');
-              filterForm.append(filterBoxEditNameLabel);
-              let filterBoxEditNameInput = document.createElement('input');
-              filterBoxEditNameInput.value = element.innerHTML;
-              filterBoxEditNameInput.setAttribute('id', 'filter-product-' + propertyName + '-input');
-              filterBoxEditNameInput.setAttribute('name', propertyName);
-              filterForm.append(filterBoxEditNameInput);
-            });
-            domFilterBox.append(filterForm);
-        });
-    }
 }
 
 class Table {
@@ -77,23 +51,6 @@ class Table {
             let newColumn = new Column(this, this.headers[idx].innerHTML);
             this.columnsArray.push(newColumn);
         }
-    }
-
-    addRecord = (newRecordArray) => {
-        if (newRecordArray.length != this.columnsArray.length) {
-            throw new Error('Argument "newRecordArray" is not the same length as the number of colums in this Table.');
-        }
-
-        let domNewTableRow = document.createElement('tr');
-        for (let idx=0; idx<newRecordArray.length; idx++) {
-            let domNewRecord = document.createElement('td');
-            domNewRecord.append(newRecordArray[idx]);
-            domNewTableRow.append(domNewRecord);
-            this.columnsArray[idx].addNewRow(domNewRecord);
-        }
-
-        this.table.getElementsByTagName('tbody')[0].appendChild(domNewTableRow);
-        this.domRecordsArray.push(domNewTableRow);
     }
 }
 
