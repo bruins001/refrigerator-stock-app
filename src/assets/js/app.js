@@ -1,5 +1,20 @@
 let domFilterBox = document.getElementById('filter-box');
 
+class Row {
+    constructor(domRow) {
+        this.domTableDataArray = new Array();
+        this.isSelected = false;
+
+        this._initdomTableDataArray(domRow);
+    }
+
+    _initdomTableDataArray(domRow) {
+        domRow.getElementsByTagName('td').forEach((element) => {
+            this.domTableDataArray.push(element);
+        });
+    }
+}
+
 class Column {
     constructor(tableOfColum, columnName) {
         this.domColumnHeader = HTMLElement;
