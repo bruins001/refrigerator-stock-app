@@ -14,6 +14,48 @@ class Row {
         }
 
         let domRow = document.createElement('tr');
+        domRow.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (this.isSelected) {
+                domFilterBox.innerHTML = '';
+                this.isSelected = false;
+                return;
+            } else {
+                tableOfRow.rowsArray.forEach((row) => {
+                    row.isSelected = false;
+                });
+            }
+            let domRow = e.target.parentElement;
+            let domHeaders = domRow.parentElement.getElementsByTagName('tr')[0].getElementsByTagName('th');
+            let filterForm = document.createElement('form');
+            filterForm.setAttribute('id', 'filter-product-form');
+            let labelsAndInputsToAddArray = new Array();
+            Array.from(domHeaders).forEach((element) => {
+                labelsAndInputsToAddArray.push(element.innerHTML);
+            });
+            let iterationCounter = -1;
+            Array.from(domRow.getElementsByTagName('td')).forEach((element) => {
+                iterationCounter++;
+                let propertyName = labelsAndInputsToAddArray[iterationCounter];
+
+                let labelsAndInputsDiv = document.createElement('div');
+                labelsAndInputsDiv.classList.add('form-group');
+                let filterBoxEditNameLabel = document.createElement('label');
+                filterBoxEditNameLabel.innerHTML = propertyName.charAt(0).toUpperCase() + propertyName.slice(1) + ': ';
+                filterBoxEditNameLabel.setAttribute('for', 'filter-product-name-input');
+                labelsAndInputsDiv.append(filterBoxEditNameLabel);
+                filterForm.append(labelsAndInputsDiv);
+                let filterBoxEditNameInput = document.createElement('input');
+                filterBoxEditNameInput.value = element.innerHTML;
+                filterBoxEditNameInput.setAttribute('id', 'filter-product-' + propertyName + '-input');
+                filterBoxEditNameInput.setAttribute('name', propertyName);
+                labelsAndInputsDiv.append(filterBoxEditNameInput);
+                filterForm.append(labelsAndInputsDiv);
+            });
+
+            this.isSelected = true;
+            domFilterBox.append(filterForm);
+        });
         for (let idx=0; idx < rowArray.length; idx++) {
             let domTableData = document.createElement('td');
             domTableData.innerHTML = rowArray[idx];
