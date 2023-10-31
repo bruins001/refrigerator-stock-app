@@ -1,17 +1,26 @@
 let domFilterBox = document.getElementById('filter-box');
 
 class Row {
-    constructor(domRow) {
+    constructor(tableOfRow, rowArray) {
         this.domTableDataArray = new Array();
         this.isSelected = false;
 
-        this._initdomTableDataArray(domRow);
+        this.reWriteRow(tableOfRow, rowArray);
     }
 
-    _initdomTableDataArray(domRow) {
-        domRow.getElementsByTagName('td').forEach((element) => {
-            this.domTableDataArray.push(element);
-        });
+    reWriteRow(tableOfRow, rowArray) {
+        if (tableOfRow.headers.length !== rowArray.length) {
+            throw Error('The "rowArray" passed to the "Row" class isn\'t the same length as the table headers');
+        }
+
+        let domRow = document.createElement('tr');
+        for (let idx=0; idx < rowArray.length; idx++) {
+            let domTableData = document.createElement('td');
+            domTableData.innerHTML = rowArray[idx];
+            domRow.append(domTableData);
+            this.domTableDataArray.push(domTableData);
+        }
+        tableOfRow.table.getElementsByTagName('tbody')[0].append(domRow);
     }
 }
 
@@ -63,7 +72,8 @@ class Table {
     }
 
     addRow(rowToAdd) {
-
+        let rowToAddObject = new Row(this, rowToAdd);
+        this.rowsArray.push(rowToAddObject);
     }
 }
 
