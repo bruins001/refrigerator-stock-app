@@ -16,8 +16,8 @@ class Row {
         let domRow = document.createElement('tr');
         domRow.addEventListener('click', (e) => {
             e.preventDefault();
+            domFilterBox.innerHTML = '';
             if (this.isSelected) {
-                domFilterBox.innerHTML = '';
                 this.isSelected = false;
                 return;
             } else {
@@ -53,6 +53,10 @@ class Row {
                 filterForm.append(labelsAndInputsDiv);
             });
 
+            let sendButton = document.createElement('input');
+            sendButton.setAttribute('type', 'submit');
+            filterForm.append(sendButton);
+            
             this.isSelected = true;
             domFilterBox.append(filterForm);
         });
