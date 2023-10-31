@@ -82,8 +82,8 @@ const table = new Table(domTable);
 const newRowArray = ['Milk', 'dairy', '27-10-2023', 123456789123];
 table.addRow(newRowArray);
 
-let formProduct = document.getElementById('add-product-form');
-formProduct.addEventListener("submit", (e) => {
+let productForm = document.getElementById('add-product-form');
+productForm.addEventListener("submit", (e) => {
   e.preventDefault();
   let domForm = e.target;
   let inputsArray = new Array().filter.call(domForm.getElementsByTagName('input'), (element) => element.getAttribute('type') != 'submit');
