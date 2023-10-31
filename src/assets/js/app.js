@@ -1,15 +1,15 @@
 let domFilterBox = document.getElementById('filter-box');
 
-class Record {
-    constructor(domRecord) {
+class Row {
+    constructor(domRow) {
         this.domTableDataArray = new Array();
         this.isSelected = false;
 
-        this._initdomTableDataArray(domRecord);
+        this._initdomTableDataArray(domRow);
     }
 
-    _initdomTableDataArray(domRecord) {
-        domRecord.getElementsByTagName('td').forEach((element) => {
+    _initdomTableDataArray(domRow) {
+        domRow.getElementsByTagName('td').forEach((element) => {
             this.domTableDataArray.push(element);
         });
     }
@@ -18,7 +18,7 @@ class Record {
 class Column {
     constructor(tableOfColum, columnName) {
         this.domColumnHeader = HTMLElement;
-        this.domRecordArray = new Array();
+        this.domRow = new Array();
 
         let coloumIndex = -1;
         let tableHeadersArray = tableOfColum.headers;
@@ -31,9 +31,9 @@ class Column {
             }
         }
 
-        for (let idx=0; idx < tableOfColum.domRecordsArray.length; idx++) {
-            let domRecord = tableOfColum.domRecordsArray[idx];
-            this.domRecordArray.push(domRecord.getElementsByTagName('th')[coloumIndex]);
+        for (let idx=0; idx < tableOfColum.rowsArray.length; idx++) {
+            let domRow = tableOfColum.rowsArray[idx];
+            this.domRow.push(domRow.getElementsByTagName('th')[coloumIndex]);
         }
     }
 }
@@ -42,7 +42,7 @@ class Table {
     constructor(domTable) {
         this.table = domTable;
         this.headers = HTMLElement;
-        this.recordsArray = new Array();
+        this.rowsArray = new Array();
         this.columnsArray = new Array();
 
         this._initClassVariables(this.table);
@@ -53,7 +53,7 @@ class Table {
 
         this.table = domTable;
         this.headers = domColumnArray[0].getElementsByTagName('th');
-        this.recordsArray = new Array();
+        this.rowsArray = new Array();
         this.columnsArray = new Array();
 
         for (let idx=0; idx < this.headers.length; idx++) {
@@ -61,12 +61,16 @@ class Table {
             this.columnsArray.push(newColumn);
         }
     }
+
+    addRow(rowToAdd) {
+
+    }
 }
 
 let domTable = document.getElementById('table-in-stock');
 const table = new Table(domTable);
-const newRecordArray = ['Milk', 'dairy', '27-10-2023', 123456789123];
-table.addRecord(newRecordArray);
+const newRowArray = ['Milk', 'dairy', '27-10-2023', 123456789123];
+table.addRow(newRowArray);
 
 let formProduct = document.getElementById('add-product-form');
 formProduct.addEventListener("submit", (e) => {
@@ -84,5 +88,5 @@ formProduct.addEventListener("submit", (e) => {
     inputsArray[idx] = inputsArray[idx].value;
   }
 
-  table.addRecord(inputsArray);
+  table.addRow(inputsArray);
 });
