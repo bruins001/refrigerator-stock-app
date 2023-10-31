@@ -27,7 +27,6 @@ class Row {
 class Column {
     constructor(tableOfColum, columnName) {
         this.domColumnHeader = HTMLElement;
-        this.domRow = new Array();
 
         let coloumIndex = -1;
         let tableHeadersArray = tableOfColum.headers;
@@ -38,11 +37,6 @@ class Column {
                 this.domColumnHeader = domColumnHeader;
                 break;
             }
-        }
-
-        for (let idx=0; idx < tableOfColum.rowsArray.length; idx++) {
-            let domRow = tableOfColum.rowsArray[idx];
-            this.domRow.push(domRow.getElementsByTagName('th')[coloumIndex]);
         }
     }
 }
