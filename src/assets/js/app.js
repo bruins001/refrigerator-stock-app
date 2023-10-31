@@ -41,10 +41,19 @@ class Column {
 class Table {
     constructor(domTable) {
         this.table = domTable;
-        let domAllColumnsArray = Array.from(this.table.getElementsByTagName('tr'));
-        this.headers = domAllColumnsArray[0].getElementsByTagName('th');
-        domAllColumnsArray.shift();
-        this.domRecordsArray = domAllColumnsArray;
+        this.headers = HTMLElement;
+        this.recordsArray = new Array();
+        this.columnsArray = new Array();
+
+        this._initClassVariables(this.table);
+    }
+
+    _initClassVariables(domTable) {
+        let domColumnArray = Array.from(this.table.getElementsByTagName('tr'));
+
+        this.table = domTable;
+        this.headers = domColumnArray[0].getElementsByTagName('th');
+        this.recordsArray = new Array();
         this.columnsArray = new Array();
 
         for (let idx=0; idx < this.headers.length; idx++) {
