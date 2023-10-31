@@ -1,15 +1,15 @@
 let domFilterBox = document.getElementById('filter-box');
 
 class Record {
-    constructor(domRow) {
+    constructor(domRecord) {
         this.domTableDataArray = new Array();
         this.isSelected = false;
 
-        this._initdomTableDataArray(domRow);
+        this._initdomTableDataArray(domRecord);
     }
 
-    _initdomTableDataArray(domRow) {
-        domRow.getElementsByTagName('td').forEach((element) => {
+    _initdomTableDataArray(domRecord) {
+        domRecord.getElementsByTagName('td').forEach((element) => {
             this.domTableDataArray.push(element);
         });
     }
@@ -18,7 +18,7 @@ class Record {
 class Column {
     constructor(tableOfColum, columnName) {
         this.domColumnHeader = HTMLElement;
-        this.domRowArray = new Array();
+        this.domRecordArray = new Array();
 
         let coloumIndex = -1;
         let tableHeadersArray = tableOfColum.headers;
@@ -32,8 +32,8 @@ class Column {
         }
 
         for (let idx=0; idx < tableOfColum.domRecordsArray.length; idx++) {
-            let domRow = tableOfColum.domRecordsArray[idx];
-            this.domRowArray.push(domRow.getElementsByTagName('th')[coloumIndex]);
+            let domRecord = tableOfColum.domRecordsArray[idx];
+            this.domRecordArray.push(domRecord.getElementsByTagName('th')[coloumIndex]);
         }
     }
 }
