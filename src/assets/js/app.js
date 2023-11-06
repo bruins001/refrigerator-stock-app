@@ -1,6 +1,11 @@
-let domFilterBox = document.getElementById('filter-box');
+let domFilterBox = document.getElementById('filter-box'); // HTML div with the ID "filter-box" saved in a JavaScript variable, so it can be accessed via DOM.
 
 class Row {
+    /**
+     * Initializes the "Row" Class.
+     * @param {Table} tableOfRow 
+     * @param {Array} rowArray 
+     */
     constructor(tableOfRow, rowArray) {
         this.domTableDataArray = new Array();
         this.isSelected = false;
@@ -8,25 +13,41 @@ class Row {
         this.reWriteRow(tableOfRow, rowArray);
     }
 
+    /**
+    * Rewrites "this.domTableDataArray" and adds an EventListener.
+    * @param {Table} tableOfRow
+    * @param {Array} rowArray
+    */
     reWriteRow(tableOfRow, rowArray) {
+        // Checks if the row isn't the same size as the length of the table headers. Throws an Error if true.
         if (tableOfRow.headers.length !== rowArray.length) {
             throw Error('The "rowArray" passed to the "Row" class isn\'t the same length as the table headers');
         }
 
+        // Creates the DOM element "tr"(table row) that contains the whole row in HTML.
         let domRow = document.createElement('tr');
+
         domRow.addEventListener('click', (e) => {
             e.preventDefault();
+            // Clears the div with ID "filter-box" in the HTML. Together with the next if statement, this code handles the row selection and prevents undesired behavior.
             domFilterBox.innerHTML = '';
+
+            // Toggles the "isSelected" Class variable.
             if (this.isSelected) {
                 this.isSelected = false;
                 return;
             } else {
+                // Sets all "isSelected" Class variables in the object tableOfRow to false. At the end of the EventListener the current row (e.target) will be set to false.
                 tableOfRow.rowsArray.forEach((row) => {
                     row.isSelected = false;
                 });
             }
+
+            // Selects the row and the corrosponding table header via the event.
             let domRow = e.target.parentElement;
             let domHeaders = domRow.parentElement.getElementsByTagName('tr')[0].getElementsByTagName('th');
+
+            // Creates form for editing the row.
             let filterForm = document.createElement('form');
             filterForm.setAttribute('id', 'filter-product-form');
             let labelsAndInputsToAddArray = new Array();
@@ -52,7 +73,6 @@ class Row {
                 labelsAndInputsDiv.append(filterBoxEditNameInput);
                 filterForm.append(labelsAndInputsDiv);
             });
-
             let sendButton = document.createElement('input');
             sendButton.setAttribute('type', 'submit');
             filterForm.append(sendButton);
@@ -60,22 +80,32 @@ class Row {
             this.isSelected = true;
             domFilterBox.append(filterForm);
         });
+
+        // Creates "td"(data table) and inserts the corresponding variable from rowArray.
         for (let idx=0; idx < rowArray.length; idx++) {
             let domTableData = document.createElement('td');
             domTableData.innerHTML = rowArray[idx];
             domRow.append(domTableData);
             this.domTableDataArray.push(domTableData);
         }
+        // Inserts the "tr"(table row) in "tbody"(table body) in the HTML.
         tableOfRow.table.getElementsByTagName('tbody')[0].append(domRow);
     }
 }
 
 class Column {
+    /** 
+     * Initializes the "Column" Class
+     * @param {Table} tableOfColum
+     * @param {String} columnName
+     */
     constructor(tableOfColum, columnName) {
         this.domColumnHeader = HTMLElement;
 
         let coloumIndex = -1;
         let tableHeadersArray = tableOfColum.headers;
+
+        // Finds and initializes in the Class variable "this.domColumnHeader" the column header HTML element, so it can be accessed via the DOM.
         for (let idx=0; idx < tableHeadersArray.length; idx++) {
             coloumIndex++;
             let domColumnHeader = tableHeadersArray[idx];
@@ -88,20 +118,15 @@ class Column {
 }
 
 class Table {
+    /**
+     * Initializes the "Table" Class
+     * @param {HTMLElement} domTable 
+     */
     constructor(domTable) {
-        this.table = domTable;
-        this.headers = HTMLElement;
-        this.rowsArray = new Array();
-        this.columnsArray = new Array();
-
-        this._initClassVariables(this.table);
-    }
-
-    _initClassVariables(domTable) {
         let domColumnArray = Array.from(this.table.getElementsByTagName('tr'));
 
         this.table = domTable;
-        this.headers = domColumnArray[0].getElementsByTagName('th');
+        this.headers = HTMLElement;
         this.rowsArray = new Array();
         this.columnsArray = new Array();
 
@@ -111,26 +136,30 @@ class Table {
         }
     }
 
+    /**
+     * Adds a "Row" object to the "rowsArray" variable
+     * @param {Array} rowToAdd 
+     */
     addRow(rowToAdd) {
         let rowToAddObject = new Row(this, rowToAdd);
         this.rowsArray.push(rowToAddObject);
     }
 }
 
-let domTable = document.getElementById('table-in-stock');
-const table = new Table(domTable);
-const newRowArray = ['Milk', 'dairy', '27-10-2023', 123456789123];
-table.addRow(newRowArray);
 
-let productForm = document.getElementById('add-product-form');
+let domTable = document.getElementById('table-in-stock'); // Gets product table from HTML
+const table = new Table(domTable); // Creates new table object based on the "Table" Class and DOM object of product table
+
+let productForm = document.getElementById('add-product-form'); // Gets the add product form from HTML.
+// Adds eventsListener to the "productForm" variable. Adds products via "table" variable.
 productForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  let domForm = e.target;
-  let inputsArray = new Array().filter.call(domForm.getElementsByTagName('input'), (element) => element.getAttribute('type') != 'submit');
+  const domForm = e.target;
+  const inputsArray = new Array().filter.call(domForm.getElementsByTagName('input'), (element) => element.getAttribute('type') != 'submit');
   for (let idx=0; idx < inputsArray.length; idx++) {
-    console.log(inputsArray[idx].getAttribute('name') === 'barcode');
     if (inputsArray[idx].getAttribute('name') === 'barcode' && inputsArray[idx].value.length !== 12) {
       throw new Error('The barcode isn\'t 12 digits.');
+      // Converts the barcode to an int and pushes it to the array.
     } else if (inputsArray[idx].getAttribute('name') === 'barcode') {
       inputsArray[idx] = parseInt(inputsArray[idx].value);
       continue;
