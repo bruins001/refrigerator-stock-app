@@ -21,7 +21,7 @@ class Row {
     reWriteRow(tableOfRow, rowArray) {
         // Checks if the row isn't the same size as the length of the table headers. Throws an Error if true.
         if (tableOfRow.headersArray.length !== rowArray.length) {
-            throw Error('The "rowArray" passed to the "Row" class isn\'t the same length as the table headers');
+            throw Error('The "rowArray" passed to the "Row" class isn\'t the same length as the table headers.');
         }
 
         // Creates the DOM element "tr"(table row) that contains the whole row in HTML.
