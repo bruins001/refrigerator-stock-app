@@ -20,7 +20,7 @@ class Row {
     */
     reWriteRow(tableOfRow, rowArray) {
         // Checks if the row isn't the same size as the length of the table headers. Throws an Error if true.
-        if (tableOfRow.headers.length !== rowArray.length) {
+        if (tableOfRow.headersArray.length !== rowArray.length) {
             throw Error('The "rowArray" passed to the "Row" class isn\'t the same length as the table headers');
         }
 
@@ -103,7 +103,7 @@ class Column {
         this.domColumnHeader = HTMLElement;
 
         let coloumIndex = -1;
-        let tableHeadersArray = tableOfColum.headers;
+        let tableHeadersArray = tableOfColum.headersArray;
 
         // Finds and initializes in the Class variable "this.domColumnHeader" the column header HTML element, so it can be accessed via the DOM.
         for (let idx=0; idx < tableHeadersArray.length; idx++) {
@@ -123,15 +123,13 @@ class Table {
      * @param {HTMLElement} domTable 
      */
     constructor(domTable) {
-        let domColumnArray = Array.from(this.table.getElementsByTagName('tr'));
-
         this.table = domTable;
-        this.headers = HTMLElement;
+        this.headersArray = document.getElementsByTagName('tbody')[0].getElementsByTagName('tr')[0].getElementsByTagName('th');
         this.rowsArray = new Array();
         this.columnsArray = new Array();
 
-        for (let idx=0; idx < this.headers.length; idx++) {
-            let newColumn = new Column(this, this.headers[idx].innerHTML);
+        for (let idx=0; idx < this.headersArray.length; idx++) {
+            let newColumn = new Column(this, this.headersArray[idx].innerHTML);
             this.columnsArray.push(newColumn);
         }
     }
