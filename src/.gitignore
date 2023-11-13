@@ -1,3 +1,6 @@
+# Folders
 vendor/
+
+# Files
 .env
 composer.lock

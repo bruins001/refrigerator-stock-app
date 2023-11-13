@@ -9,5 +9,5 @@ define('ROUTE_URL_INDEX', BASE_URL);
 
 ROUTE::add('/', fn() => HomepageController::index(), 'get');
 
-ROUTE::run('/');
+ROUTE::run('/'); // You can add a prefix here. For example '/api' the prefix '/api' will be added for the 1 URL above.
 ?>

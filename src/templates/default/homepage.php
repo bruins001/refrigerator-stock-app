@@ -11,6 +11,7 @@
     <main>
       <h1>Refrigerator stock app</h1>
       <h2>Product form</h2>
+      <!-- This form can add content to the table -->
       <form id="add-product-form">
         <label for="add-product-name-input">Name: </label>
         <input type="text" name="name" id="add-product-name-input" required></input>
@@ -28,6 +29,7 @@
       </form>
     </main>
     <?php include 'components/_stockInTableFormat.php'; ?>
+    <!-- Filters and the editing of the table will happen in the filter-box -->
     <div id="filter-box"></div>
     <script src="/assets/js/app.js"></script>
 </body>

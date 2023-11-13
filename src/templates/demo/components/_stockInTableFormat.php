@@ -6,5 +6,6 @@
             <th>Expiration date</th>
             <th>Barcode</th>
         </tr>
+        <!-- Further table content will be added via JavaScript -->
     </tbody>
 </table>
