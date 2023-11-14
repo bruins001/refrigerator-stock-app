@@ -73,10 +73,10 @@ class Row {
                 labelsAndInputsDiv.append(filterBoxEditNameInput);
                 filterForm.append(labelsAndInputsDiv);
             });
-            let sendButton = document.createElement('input');
-            sendButton.setAttribute('type', 'submit');
-            sendButton.setAttribute('value', 'Edit');
-            sendButton.addEventListener('click', (e) => {
+            let editButton = document.createElement('input');
+            editButton.setAttribute('type', 'submit');
+            editButton.setAttribute('value', 'Edit');
+            editButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 let domForm = e.target.parentElement;
                 let currentRow;
@@ -98,7 +98,7 @@ class Row {
                 this.isSelected = false;
                 domForm.remove();
             });
-            filterForm.append(sendButton);
+            filterForm.append(editButton);
             
             this.isSelected = true;
             domFilterBox.append(filterForm);
