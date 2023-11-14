@@ -75,6 +75,29 @@ class Row {
             });
             let sendButton = document.createElement('input');
             sendButton.setAttribute('type', 'submit');
+            sendButton.setAttribute('value', 'Edit');
+            sendButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                let domForm = e.target.parentElement;
+                let currentRow;
+
+                // Finds the current row in other words the row that is now selected.
+                tableOfRow.rowsArray.forEach((row) => {
+                    if (row.isSelected === true) {
+                        currentRow = row;
+                    }
+                });
+
+                for (let idx=0; idx < currentRow.domTableDataArray.length; idx++) {
+                    let domTableData = currentRow.domTableDataArray[idx]; // This dom element will be updated.
+                    let domInputForm = domForm.getElementsByTagName('input')[idx]; // This dom element has the new data for the "domTableData" variable.
+                    let newData = domInputForm.value;
+
+                    domTableData.innerHTML = newData;
+                }
+                this.isSelected = false;
+                domForm.remove();
+            });
             filterForm.append(sendButton);
             
             this.isSelected = true;
