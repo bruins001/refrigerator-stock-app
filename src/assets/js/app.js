@@ -189,4 +189,12 @@ productForm.addEventListener("submit", (e) => {
   }
 
   table.addRow(inputsArray);
+
+  // Clears input domElements.
+  Array.from(domForm.getElementsByTagName('input')).forEach((domElement) => {
+    if (domElement.getAttribute('type') === 'submit') {
+        return;
+    }
+    domElement.value = '';
+  });
 });
