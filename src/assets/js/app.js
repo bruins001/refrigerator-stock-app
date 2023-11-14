@@ -99,6 +99,33 @@ class Row {
                 domForm.remove();
             });
             filterForm.append(editButton);
+
+            let deleteButton = document.createElement('input');
+            deleteButton.setAttribute('type', 'submit');
+            deleteButton.setAttribute('value', 'Delete');
+            deleteButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                let domForm = e.target.parentElement;
+                let currentRow
+
+                // Finds the current row in other words the row that is now selected.
+                tableOfRow.rowsArray.forEach((row) => {
+                    if (row.isSelected === true) {
+                        currentRow = row;
+                    }
+                });
+
+                currentRow.domTableDataArray[0].parentElement.remove(); // Removes row in HTML.
+
+                // Removes current row from table object.
+                tableOfRow.rowsArray = tableOfRow.rowsArray.filter((row) => {
+                    return row !== currentRow;
+                });
+
+                this.isSelected = false;
+                domForm.remove();
+            });
+            filterForm.append(deleteButton);
             
             this.isSelected = true;
             domFilterBox.append(filterForm);
