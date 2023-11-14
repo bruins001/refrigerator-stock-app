@@ -1,6 +1,7 @@
 <?php
 
 use Auth0\SDK\Auth0;
+use Auth0\SDK\Exception\AuthenticationException;
 
 // Does the authentication for the users.
 class AuthenticationController {
@@ -24,6 +25,8 @@ class AuthenticationController {
      * @param string $ROUTE_URL_INDEX The Route callback url.
      */
     static function logout($auth0, $ROUTE_URL_INDEX) {
+        session_start();
+        session_destroy();
         header('Location: ' . $auth0->logout($ROUTE_URL_INDEX));
         exit;
     }
@@ -55,6 +58,7 @@ class AuthenticationController {
      * @param string $ROUTE_URL_INDEX The Route callback url.
      */
     static function checkForSession($auth0) {
+        session_start();
         $session = null;
         if (!isset($_SESSION["user"]) && $auth0->getCredentials()) {
             $_SESSION["user"] = $auth0->getCredentials();

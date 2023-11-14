@@ -11,7 +11,7 @@ define('ROUTE_URL_LOGIN', ROUTE_URL_INDEX . '/login');
 define('ROUTE_URL_CALLBACK', ROUTE_URL_INDEX . '/callback'); // The URL the user gets back to after the login on auth0 side and does some validation for security.
 define('ROUTE_URL_LOGOUT', ROUTE_URL_INDEX . '/logout');
 
-ROUTE::add('/', fn() => HomepageController::index($auth0));
+ROUTE::add('/', fn() => HomepageController::index($auth0, ROUTE_URL_CALLBACK));
 ROUTE::add('/login', fn() => AuthenticationController::login($auth0, ROUTE_URL_CALLBACK));
 ROUTE::add('/callback', fn() => AuthenticationController::callback($auth0, ROUTE_URL_CALLBACK, ROUTE_URL_INDEX));
 ROUTE::add('/logout', fn() => AuthenticationController::logout($auth0, ROUTE_URL_INDEX));
