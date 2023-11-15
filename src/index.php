@@ -12,5 +12,7 @@ try {
     exit;
 }
 
-require_once 'routes/default/web.php'; // The non demo routes.
+// The non demo routes.
+require_once 'routes/default/web.php';
+require_once 'routes/default/api.php';
 ?>
