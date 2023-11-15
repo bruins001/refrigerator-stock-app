@@ -225,3 +225,13 @@ productForm.addEventListener("submit", (e) => {
     domElement.value = '';
   });
 });
+
+// Fetch data
+const fetchProducts = async () => {
+    const response = await fetch(window.location.href + 'api/products');
+    console.log(response.ok);
+    const products = await response.json();
+    console.log(products);
+};
+fetchProducts();
+setInterval(fetchProducts, 60000);
