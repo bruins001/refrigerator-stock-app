@@ -31,6 +31,6 @@
     <?php include 'components/_stockInTableFormat.php'; ?>
     <!-- Filters and the editing of the table will happen in the filter-box -->
     <div id="filter-box"></div>
-    <script src="/assets/js/app.js"></script>
+    <script type="module" src="/assets/js/defaultApp.js"></script>
 </body>
 </html>

@@ -189,6 +189,11 @@ class Table {
      * @param {Array} rowToAdd 
      */
     addRow(rowToAdd) {
+        this.rowsArray.forEach((tableRow) => {
+            if (tableRow.domTableDataArray[tableRow.domTableDataArray.length - 1].innerHTML == rowToAdd[rowToAdd.length - 1]) {
+                throw Error('Row already exists in this table.');
+            }
+        });
         let rowToAddObject = new Row(this, rowToAdd);
         this.rowsArray.push(rowToAddObject);
     }
@@ -226,12 +231,4 @@ productForm.addEventListener("submit", (e) => {
   });
 });
 
-// Fetch data
-const fetchProducts = async () => {
-    const response = await fetch(window.location.href + 'api/products');
-    console.log(response.ok);
-    const products = await response.json();
-    console.log(products);
-};
-fetchProducts();
-setInterval(fetchProducts, 60000);
+export {table};
