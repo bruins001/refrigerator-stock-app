@@ -1,12 +1,20 @@
 import {table} from './app.js';
 
-// Fetch data
+/**
+ * Fetches data from '/api/products'
+ * @returns {Array} products
+ */
 const fetchProducts = async () => {
     const response = await fetch(window.location.href + 'api/products');
     const products = await response.json();
     return products;
 };
 
+
+/**
+ * Updates table with rows fetched.
+ * @param {Table} tableToUpdate
+ */
 const updateProducts = async (tableToUpdate) => {
     const products = await fetchProducts();
     products.forEach((product) => {
