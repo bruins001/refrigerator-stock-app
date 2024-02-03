@@ -1,4 +1,4 @@
-import {table} from './app.js';
+import {Table, Column, Row} from './classes.js';
 
 /**
  * Fetches data from '/api/products'
