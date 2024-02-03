@@ -10,7 +10,7 @@ use Steampixel\Route; // The router library
 // define('ROUTE_URL_CALLBACK', ROUTE_URL_INDEX . '/callback'); // The URL the user gets back to after the login on auth0 side and does some validation for security.
 // define('ROUTE_URL_LOGOUT', ROUTE_URL_INDEX . '/logout');
 
-ROUTE::add('/products', fn() => ProductController::getProducts());
+// ROUTE::add('/products', fn() => ProductController::getProducts());
 // ROUTE::add('/login', fn() => AuthenticationController::login($auth0, ROUTE_URL_CALLBACK));
 // ROUTE::add('/callback', fn() => AuthenticationController::callback($auth0, ROUTE_URL_CALLBACK, ROUTE_URL_INDEX));
 // ROUTE::add('/logout', fn() => AuthenticationController::logout($auth0, ROUTE_URL_INDEX));
