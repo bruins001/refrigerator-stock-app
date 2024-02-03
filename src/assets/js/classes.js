@@ -1,4 +1,58 @@
-let domFilterBox = document.getElementById('filter-box'); // HTML div with the ID "filter-box" saved in a JavaScript variable, so it can be accessed via DOM.
+class Table {
+    /**
+     * Initializes the "Table" Class
+     * @param {HTMLElement} domTable 
+     */
+    constructor(domTable) {
+        this.table = domTable;
+        this.headersArray = document.getElementsByTagName('tbody')[0].getElementsByTagName('tr')[0].getElementsByTagName('th');
+        this.rowsArray = new Array();
+        this.columnsArray = new Array();
+
+        for (let idx=0; idx < this.headersArray.length; idx++) {
+            let newColumn = new Column(this, this.headersArray[idx].innerHTML);
+            this.columnsArray.push(newColumn);
+        }
+    }
+
+    /**
+     * Adds a "Row" object to the "rowsArray" variable
+     * @param {Array} rowToAdd 
+     */
+    addRow(rowToAdd) {
+        this.rowsArray.forEach((tableRow) => {
+            if (tableRow.domTableDataArray[tableRow.domTableDataArray.length - 1].innerHTML == rowToAdd[rowToAdd.length - 1]) {
+                throw Error('Row already exists in this table.');
+            }
+        });
+        let rowToAddObject = new Row(this, rowToAdd);
+        this.rowsArray.push(rowToAddObject);
+    }
+}
+
+class Column {
+    /** 
+     * Initializes the "Column" Class
+     * @param {Table} tableOfColum
+     * @param {String} columnName
+     */
+    constructor(tableOfColum, columnName) {
+        this.domColumnHeader = HTMLElement;
+
+        let coloumIndex = -1;
+        let tableHeadersArray = tableOfColum.headersArray;
+
+        // Finds and initializes in the Class variable "this.domColumnHeader" the column header HTML element, so it can be accessed via the DOM.
+        for (let idx=0; idx < tableHeadersArray.length; idx++) {
+            coloumIndex++;
+            let domColumnHeader = tableHeadersArray[idx];
+            if (domColumnHeader.innerHTML === columnName) {
+                this.domColumnHeader = domColumnHeader;
+                break;
+            }
+        }
+    }
+}
 
 class Row {
     /**
@@ -73,10 +127,10 @@ class Row {
                 labelsAndInputsDiv.append(filterBoxEditNameInput);
                 filterForm.append(labelsAndInputsDiv);
             });
-            let sendButton = document.createElement('input');
-            sendButton.setAttribute('type', 'submit');
-            sendButton.setAttribute('value', 'Edit');
-            sendButton.addEventListener('click', (e) => {
+            let editButton = document.createElement('input');
+            editButton.setAttribute('type', 'submit');
+            editButton.setAttribute('value', 'Edit');
+            editButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 let domForm = e.target.parentElement;
                 let currentRow;
@@ -98,7 +152,34 @@ class Row {
                 this.isSelected = false;
                 domForm.remove();
             });
-            filterForm.append(sendButton);
+            filterForm.append(editButton);
+
+            let deleteButton = document.createElement('input');
+            deleteButton.setAttribute('type', 'submit');
+            deleteButton.setAttribute('value', 'Delete');
+            deleteButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                let domForm = e.target.parentElement;
+                let currentRow
+
+                // Finds the current row in other words the row that is now selected.
+                tableOfRow.rowsArray.forEach((row) => {
+                    if (row.isSelected === true) {
+                        currentRow = row;
+                    }
+                });
+
+                currentRow.domTableDataArray[0].parentElement.remove(); // Removes row in HTML.
+
+                // Removes current row from table object.
+                tableOfRow.rowsArray = tableOfRow.rowsArray.filter((row) => {
+                    return row !== currentRow;
+                });
+
+                this.isSelected = false;
+                domForm.remove();
+            });
+            filterForm.append(deleteButton);
             
             this.isSelected = true;
             domFilterBox.append(filterForm);
@@ -116,85 +197,4 @@ class Row {
     }
 }
 
-class Column {
-    /** 
-     * Initializes the "Column" Class
-     * @param {Table} tableOfColum
-     * @param {String} columnName
-     */
-    constructor(tableOfColum, columnName) {
-        this.domColumnHeader = HTMLElement;
-
-        let coloumIndex = -1;
-        let tableHeadersArray = tableOfColum.headersArray;
-
-        // Finds and initializes in the Class variable "this.domColumnHeader" the column header HTML element, so it can be accessed via the DOM.
-        for (let idx=0; idx < tableHeadersArray.length; idx++) {
-            coloumIndex++;
-            let domColumnHeader = tableHeadersArray[idx];
-            if (domColumnHeader.innerHTML === columnName) {
-                this.domColumnHeader = domColumnHeader;
-                break;
-            }
-        }
-    }
-}
-
-class Table {
-    /**
-     * Initializes the "Table" Class
-     * @param {HTMLElement} domTable 
-     */
-    constructor(domTable) {
-        this.table = domTable;
-        this.headersArray = document.getElementsByTagName('tbody')[0].getElementsByTagName('tr')[0].getElementsByTagName('th');
-        this.rowsArray = new Array();
-        this.columnsArray = new Array();
-
-        for (let idx=0; idx < this.headersArray.length; idx++) {
-            let newColumn = new Column(this, this.headersArray[idx].innerHTML);
-            this.columnsArray.push(newColumn);
-        }
-    }
-
-    /**
-     * Adds a "Row" object to the "rowsArray" variable
-     * @param {Array} rowToAdd 
-     */
-    addRow(rowToAdd) {
-        let rowToAddObject = new Row(this, rowToAdd);
-        this.rowsArray.push(rowToAddObject);
-    }
-}
-
-
-let domTable = document.getElementById('table-in-stock'); // Gets product table from HTML
-const table = new Table(domTable); // Creates new table object based on the "Table" Class and DOM object of product table
-
-let productForm = document.getElementById('add-product-form'); // Gets the add product form from HTML.
-// Adds eventsListener to the "productForm" variable. Adds products via "table" variable.
-productForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const domForm = e.target;
-  const inputsArray = new Array().filter.call(domForm.getElementsByTagName('input'), (element) => element.getAttribute('type') != 'submit');
-  for (let idx=0; idx < inputsArray.length; idx++) {
-    if (inputsArray[idx].getAttribute('name') === 'barcode' && inputsArray[idx].value.length !== 12) {
-      throw new Error('The barcode isn\'t 12 digits.');
-      // Converts the barcode to an int and pushes it to the array.
-    } else if (inputsArray[idx].getAttribute('name') === 'barcode') {
-      inputsArray[idx] = parseInt(inputsArray[idx].value);
-      continue;
-    }
-    inputsArray[idx] = inputsArray[idx].value;
-  }
-
-  table.addRow(inputsArray);
-
-  // Clears input domElements.
-  Array.from(domForm.getElementsByTagName('input')).forEach((domElement) => {
-    if (domElement.getAttribute('type') === 'submit') {
-        return;
-    }
-    domElement.value = '';
-  });
-});
+export {Table, Column, Row}
